@@ -1,14 +1,19 @@
 # 실행 전 모듈 먼저 설치
 # brew install portaudio && pip install pyaudio
 # pip install openai
+# pip install python-dotenv
 
 import speech_recognition as sr
 import pyaudio
 import openai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # https://platform.openai.com/account/api-keys
-# Create new secret key 클릭해서 api key 생성 후 아래에 입력
-openai.api_key = "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"
+# Create new secret key 클릭해서 api key 생성
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 
 def get_openai_response(prompt, print_output=False):
