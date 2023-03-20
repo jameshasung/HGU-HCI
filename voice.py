@@ -6,7 +6,9 @@ import speech_recognition as sr
 import pyaudio
 import openai
 
-openai.api_key = "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"
+# https://platform.openai.com/account/api-keys
+# Create new secret key 클릭해서 api key 생성 후 아래에 입력
+openai.api_key = "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"
 
 
 def get_openai_response(prompt, print_output=False):
