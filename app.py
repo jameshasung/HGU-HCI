@@ -17,7 +17,10 @@ from flask import Flask, render_template, request
 # Flask 애플리케이션 생성
 app = Flask(__name__)
 
-# OpenAI API Key 설정
+load_dotenv()
+
+# https://platform.openai.com/account/api-keys
+# Create new secret key 클릭해서 api key 생성
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # OpenAI GPT-3로 응답 생성
