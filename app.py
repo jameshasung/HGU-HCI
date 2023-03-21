@@ -1,3 +1,12 @@
+# 실행 전 모듈 먼저 설치
+# brew install portaudio && pip install pyaudio
+# pip install openai
+# pip install python-dotenv
+# pip install Flask
+
+# .env 파일 생성해서 아래 노션에 있는 KEY 복붙
+# https://www.notion.so/API-e9f3135d79834fd689467e2314c68007?pvs=4
+
 import os
 import speech_recognition as sr
 import pyaudio
