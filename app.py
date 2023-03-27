@@ -68,8 +68,8 @@ def play_audio(text):
     audio = BytesIO()
     tts.write_to_fp(audio)
     audio.seek(0)
-    song = AudioSegment.from_file(audio, format="mp3")
-    play(song)
+    speaker = AudioSegment.from_file(audio, format="mp3")
+    play(speaker)
 # Flask 라우트 및 뷰 함수
 
 @app.route('/')
