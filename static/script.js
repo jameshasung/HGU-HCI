@@ -1,3 +1,4 @@
+//  static/script.js
 $(function () {
   // 음성 입력 버튼 클릭 시
   $("#record-btn").on("click", function () {
