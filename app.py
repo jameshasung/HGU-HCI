@@ -3,7 +3,7 @@
 # pip install openai
 # pip install python-dotenv
 # pip install Flask
-
+# brew install ffmpeg
 # .env 파일 생성해서 아래 노션에 있는 KEY 복붙
 # https://www.notion.so/API-e9f3135d79834fd689467e2314c68007?pvs=4
 
@@ -13,6 +13,11 @@ import pyaudio
 import openai
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from pydub import AudioSegment
+from pydub.playback import play
+from gtts import gTTS
+from io import BytesIO
+
 
 # Flask 애플리케이션 생성
 app = Flask(__name__)
@@ -58,8 +63,14 @@ def recognize_speech():
         print("구글 음성 인식 API에 접근할 수 없습니다: {0}".format(e))
         return None
 
+def play_audio(text):
+    tts = gTTS(text=text, lang='ko')
+    audio = BytesIO()
+    tts.write_to_fp(audio)
+    audio.seek(0)
+    song = AudioSegment.from_file(audio, format="mp3")
+    play(song)
 # Flask 라우트 및 뷰 함수
-
 
 @app.route('/')
 def index():
@@ -71,6 +82,7 @@ def get_response():
     if request.method == 'POST':
         text = request.form['text']
         response = get_openai_response(text)
+        play_audio(response)
         return response
 
 
