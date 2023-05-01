@@ -18,3 +18,27 @@ $(function () {
     });
   });
 });
+
+
+$('#category-select').on('change', function() {
+  var selectedCategory = $(this).val();
+  $.ajax({
+    url: '/set_category',
+    data: {'category': selectedCategory},
+    method: 'POST'
+  });
+});
+
+$('#record-btn').on('click', function() {
+  var selectedCategory = $('#category-select').val();
+  var spokenInput = ... // Retrieve the user's spoken input
+  $.ajax({
+    url: '/get_response',
+    data: {'category': selectedCategory, 'input': spokenInput},
+    method: 'POST',
+    success: function(response) {
+      $('#response').text(response);
+      // Output the response to speech
+    }
+  });
+});

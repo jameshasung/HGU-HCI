@@ -28,9 +28,10 @@ load_dotenv()
 # Create new secret key 클릭해서 api key 생성
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
+
+
+
 # OpenAI GPT-3로 응답 생성
-
-
 def get_openai_response(prompt, print_output=False):
     completions = openai.Completion.create(
         engine='text-davinci-003',
@@ -45,8 +46,6 @@ def get_openai_response(prompt, print_output=False):
     return completions.choices[0].text
 
 # 음성 입력을 텍스트로 변환하는 함수
-
-
 def recognize_speech():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -93,6 +92,15 @@ def speech_to_text():
         return text
     else:
         return "음성 인식에 실패했습니다."
+
+@app.route('/set_category', methods=['POST'])
+def set_category():
+  selected_category = request.form['category']
+  session['selected_category'] = selected_category
+  return 'Category set!'
+
+
+
 
 
 if __name__ == '__main__':
