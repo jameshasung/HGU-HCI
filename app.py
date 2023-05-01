@@ -29,8 +29,6 @@ load_dotenv()
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 
-
-
 # OpenAI GPT-3로 응답 생성
 def get_openai_response(prompt, print_output=False):
     completions = openai.Completion.create(
@@ -46,6 +44,8 @@ def get_openai_response(prompt, print_output=False):
     return completions.choices[0].text
 
 # 음성 입력을 텍스트로 변환하는 함수
+
+
 def recognize_speech():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -62,6 +62,7 @@ def recognize_speech():
         print("구글 음성 인식 API에 접근할 수 없습니다: {0}".format(e))
         return None
 
+
 def play_audio(text):
     tts = gTTS(text=text, lang='ko')
     audio = BytesIO()
@@ -70,6 +71,7 @@ def play_audio(text):
     speak = AudioSegment.from_file(audio, format="mp3")
     play(speak)
 # Flask 라우트 및 뷰 함수
+
 
 @app.route('/')
 def index():
@@ -93,14 +95,32 @@ def speech_to_text():
     else:
         return "음성 인식에 실패했습니다."
 
+
 @app.route('/set_category', methods=['POST'])
 def set_category():
-  selected_category = request.form['category']
-  session['selected_category'] = selected_category
-  return 'Category set!'
+    selected_category = request.form['category']
+    session['selected_category'] = selected_category
+    return 'Category set!'
 
 
+@app.route('/love')
+def love():
+    return render_template('love.html')
 
+
+@app.route('/Career')
+def career():
+    return render_template('Career.html')
+
+
+@app.route('/Health')
+def health():
+    return render_template('Health.html')
+
+
+@app.route('/Finance')
+def finance():
+    return render_template('Finance.html')
 
 
 if __name__ == '__main__':

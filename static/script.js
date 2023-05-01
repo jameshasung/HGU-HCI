@@ -19,26 +19,34 @@ $(function () {
   });
 });
 
-
-$('#category-select').on('change', function() {
+$('#category-select').on('change', function () {
   var selectedCategory = $(this).val();
-  $.ajax({
-    url: '/set_category',
-    data: {'category': selectedCategory},
-    method: 'POST'
-  });
+  var newUrl = window.location.href.replace(/(category=)[^&]+/, '$1' + selectedCategory);
+  if (newUrl.indexOf('?') === -1) {
+    newUrl += '?category=' + selectedCategory;
+  }
+  window.location.href = newUrl;
 });
 
-$('#record-btn').on('click', function() {
+// $('#category-select').on('change', function() {
+//   var selectedCategory = $(this).val();
+//   $.ajax({
+//     url: '/set_category',
+//     data: {'category': selectedCategory},
+//     method: 'POST'
+//   });
+// });
+
+$('#record-btn').on('click', function () {
   var selectedCategory = $('#category-select').val();
   var spokenInput = ... // Retrieve the user's spoken input
-  $.ajax({
-    url: '/get_response',
-    data: {'category': selectedCategory, 'input': spokenInput},
-    method: 'POST',
-    success: function(response) {
-      $('#response').text(response);
-      // Output the response to speech
-    }
-  });
+$.ajax({
+  url: '/get_response',
+  data: { 'category': selectedCategory, 'input': spokenInput },
+  method: 'POST',
+  success: function (response) {
+    $('#response').text(response);
+    // Output the response to speech
+  }
+});
 });
