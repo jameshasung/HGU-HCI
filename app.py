@@ -53,6 +53,7 @@ def recognize_speech():
         audio = r.listen(source)
     try:
         text = r.recognize_google(audio, language='ko-KR')
+        
         print("인식된 텍스트: " + text)
         return text
     except sr.UnknownValueError:
@@ -81,7 +82,7 @@ def index():
 @app.route('/get_openai_response', methods=['POST'])
 def get_response():
     if request.method == 'POST':
-        text = request.form['text']
+        text = '너는 연애전문가야 구체적인 해결책을 제시해줘' + request.form['text']
         response = get_openai_response(text)
         play_audio(response)
         return response
