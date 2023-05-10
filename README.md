@@ -1,2 +1,2 @@
 # HGU-HCI
-ADHD Web Service
+GPT-API를 활용한 chat-bot
